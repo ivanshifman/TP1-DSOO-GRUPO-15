@@ -12,7 +12,7 @@ Este proyecto fue desarrollado por el siguiente equipo de trabajo:
   Email: ivanshifman1300@gmail.com  
   Nombre Completo: Iván Ezequiel Shifman  
 
-- **Ángel sábato**  
+- **Ángel Sabato**  
   Email: 19angel.s89@gmail.com  
   Nombre Completo: Ángel Sabato  
 
