@@ -12,8 +12,9 @@ internal class Program
         cargarLibros(10, biblioteca);
         cargarLibros(2, biblioteca);
         biblioteca.listarLibros();
+
         Console.WriteLine("Eliminamos el Libro5 de la biblioteca:");
-        biblioteca.eliminarLibro("Libro5");
+        Console.WriteLine(biblioteca.eliminarLibro("Libro5"));
         biblioteca.listarLibros();
 
         // ultima consigna Semana 5

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace BibliotecaTP.Colecciones
 {
@@ -48,27 +49,25 @@ namespace BibliotecaTP.Colecciones
             }
         }
 
-        public bool eliminarLibro(string titulo)
+        public string eliminarLibro(string titulo)
         {
             Libro? libro = buscarLibro(titulo);
             if (libro != null)
             {
                 libros.Remove(libro);
-                Console.WriteLine($"El libro {titulo} ha sido eliminado de la biblioteca.");
-                return true;
+                return $"El libro '{titulo}' ha sido eliminado de la biblioteca.";
             }
-            return false;
+            return "LIBRO INEXISTENTE";
         }
 
         public string altaLector(string nombre, string dni)
         {
             if (buscarLector(dni) != null)
             {
-                //Console.WriteLine($"LECTOR CON DNI {dni} YA EXISTE");
                 return $"LECTOR CON DNI {dni} YA EXISTE";
             }
+
             lectores.Add(new Lector(nombre, dni));
-            //Console.WriteLine($"SE DIO DE ALTA AL LECTOR {nombre}");
             return $"SE DIO DE ALTA AL LECTOR {nombre}";
         }
 
@@ -78,25 +77,21 @@ namespace BibliotecaTP.Colecciones
             Lector lectorSolicitante = buscarLector(dni);
             if (lectorSolicitante == null)
             {
-                Console.WriteLine("No se puede realizar el prestamo del libro " + titulo + ", ya que el lector con dni " + dni + " no existe.");
-                return "LECTOR INEXISTENTE";
+                return $"No se puede realizar el préstamo: lector con DNI {dni} no existe.";
             }
 
             // 2. Verificar que el lector no haya alcanzado el tope de préstamos (3 libros)
             if (lectorSolicitante.getLibrosPrestados().Count >= 3)
             {
-                Console.WriteLine("El Lector con dni " + dni + " ha alcanzado su tope de prèstamos.");
-                return "TOPE DE PRESTAMO ALCAZADO";
+                return $"El lector con DNI {dni} ha alcanzado su tope de préstamos. \nTOPE DE PRESTAMO ALCANZADO";
             }
 
             // 3. Buscar el libro por título en la colección de libros disponibles
             Libro libroSolicitado = buscarLibroPorTitulo(titulo);
             if (libroSolicitado == null)
             {
-                Console.WriteLine("LIBRO CON TITULO " + titulo +" INEXISTENTE");
-                return "LIBRO INEXISTENTE";
+                return $"El libro con título '{titulo}' no existe en la biblioteca. \nLIBRO INEXISTENTE";
             }
-
 
             // 4. Si llegamos aquí, el préstamo es posible
             // Quitar el libro de la biblioteca
@@ -104,8 +99,7 @@ namespace BibliotecaTP.Colecciones
 
             // Asignar el libro al lector
             lectorSolicitante.agregarLibro(libroSolicitado);
-            Console.WriteLine("Se prestò el libro:" + titulo + " al lector con DNI: " + dni);
-            return "PRESTAMO EXITOSO";
+            return $"Se prestó el libro '{titulo}' al lector con DNI {dni}. \nPRESTAMO EXITOSO";
         }
 
         // Método auxiliar para buscar libro por título
@@ -128,15 +122,13 @@ namespace BibliotecaTP.Colecciones
             Lector lectorSolicitante = buscarLector(dni);
             if (lectorSolicitante == null)
             {
-                Console.WriteLine("No se puede realizar la devolucion del prestamo del libro " + titulo + ", ya que el lector con dni " + dni + " no existe.");
-                return "LECTOR INEXISTENTE";
+                return $"No se puede devolver: lector con DNI {dni} no existe. \nLECTOR INEXISTENTE";
             }
 
             // 2. Buscar el libro por título en la colección de libros del Lector
             if (lectorSolicitante.tieneLibro(titulo) == false)
             {
-                Console.WriteLine("No se encontró el libro: " + titulo);
-                return "EL LIBRO INFORMADO NO LO TIENE EL LECTOR";
+                return $"El lector con DNI {dni} no tiene el libro '{titulo}'. \nEL LIBRO INFORMADO NO LO TIENE EL LECTOR";
             }
 
             // 3. OBTENER LOS DATOS DEL LIBRO
@@ -144,7 +136,7 @@ namespace BibliotecaTP.Colecciones
             string editorial = "";
             foreach (Libro libro in lectorSolicitante.getLibrosPrestados())
             {
-                if (libro.getTitulo() == titulo)
+                if (libro.getTitulo().Equals(titulo, StringComparison.OrdinalIgnoreCase))
                 {
                     autor = libro.getAutor();
                     editorial = libro.getEditorial();
@@ -158,8 +150,7 @@ namespace BibliotecaTP.Colecciones
             // 5. AGREGAR EL LIBRO DE VUELTA A LA BIBLIOTECA
             agregarLibro(titulo, autor, editorial);
 
-            Console.WriteLine($"Libro '{titulo}' devuelto correctamente y agregado al catálogo.");
-            return "DEVOLUCION EXITOSA";
+            return $"Libro '{titulo}' devuelto correctamente y agregado al catálogo. \nDEVOLUCION EXITOSA";
         }
 
         public string librosPrestadosAlLector(string dni)
@@ -168,18 +159,17 @@ namespace BibliotecaTP.Colecciones
             Lector lectorSolicitante = buscarLector(dni);
             if (lectorSolicitante == null)
             {
-                Console.WriteLine("No se puede encontrar prestamos de libros, ya que el lector con dni " + dni + " no existe.");
-                return "LECTOR INEXISTENTE";
+                return $"No se puede encontrar préstamos: lector con DNI {dni} no existe. \nLECTOR INEXISTENTE";
             }
 
             // 2. Verificar que el lector tenga libros prestados
             if (lectorSolicitante.getLibrosPrestados().Count == 0)
             {
-                Console.WriteLine("No tiene libros prestados.");
-                return "LECTOR NO CUENTA CON LIBROS PRESTADOS";
+                return $"El lector con DNI {dni} no tiene libros prestados. \nLECTOR NO CUENTA CON LIBROS PRESTADOS";
             }
+
             // 3. si tiene libros recorre la lista de libros e imprime el titulo de los que tiene el lector
-            Console.WriteLine($"El lector con DNI {dni} tiene {lectorSolicitante.getLibrosPrestados().Count} libros.");
+            string resultado = $"El lector con DNI {dni} tiene {lectorSolicitante.getLibrosPrestados().Count} libros:\n";
             // Recorrer la lista de libros prestados
             for (int i = 0; i < lectorSolicitante.getLibrosPrestados().Count; i++)
             {
@@ -187,9 +177,12 @@ namespace BibliotecaTP.Colecciones
                 Libro libro = lectorSolicitante.getLibrosPrestados()[i];
 
                 // Imprimir el título del libro
-                Console.WriteLine($"  {i + 1}. {libro.getTitulo()}");
+                resultado += $"  {i + 1}. {libro.getTitulo()}\n";
             }
-            return "FIN DE LA LISTA DE LIBROS PRESTADO";
+
+            resultado += "FIN DE LA LISTA DE LIBROS PRESTADOS";
+
+            return resultado;
         }
     }
 }

@@ -50,23 +50,13 @@ namespace BibliotecaTP.Colecciones
             validaAutor = autor;
             validaEditorial = editorial;
         }
-        public string getTitulo()
-        {
-            return titulo;
-        }
+        public string getTitulo() => titulo;
+        public string getAutor() => autor;
+        public string getEditorial() => editorial;
 
-        public string getAutor()
-        {
-            return autor;
-        }
-
-        public string getEditorial()
-        {
-            return editorial;
-        }
         public override string ToString()
         {
-            return "Tìtulo: " + titulo + " Autor: " + autor + " Editorial: " + editorial;
+            return $"Tìtulo: {titulo} Autor: {autor} Editorial: {editorial}";
         }
     }
 }

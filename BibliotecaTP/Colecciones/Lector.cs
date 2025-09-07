@@ -39,15 +39,8 @@ namespace BibliotecaTP.Colecciones
                 dni = value;
             }
         }
-        public string getNombre()
-        {
-            return nombre;
-        }
-
-        public string getDni()
-        {
-            return dni;
-        }
+        public string getNombre() => nombre;
+        public string getDni() => dni;
 
         // Método para agregar un libro a la lista de préstamos
         public void agregarLibro(Libro libro)
@@ -57,22 +50,18 @@ namespace BibliotecaTP.Colecciones
 
         public override string ToString()
         {
-            return "Nombre: " + nombre + " DNI: " + dni;
+            return $"Nombre: {nombre} DNI: {dni}";
+        }
 
-        }
         // Método para obtener la lista de libros prestados
-        public List<Libro> getLibrosPrestados()
-        {
-            return this.librosPrestados;
-        }
+        public List<Libro> getLibrosPrestados() => this.librosPrestados;
 
         // Método opcional: para devolver un libro (útil para futuros métodos)
-        // Usando expresiòn Lambda
         public void devolverLibroPorTitulo(string titulo)
         {
             for (int i = 0; i < librosPrestados.Count; i++)
             {
-                if (librosPrestados[i].getTitulo() == titulo)
+                if (librosPrestados[i].getTitulo().Equals(titulo, StringComparison.OrdinalIgnoreCase))
                 {
                     librosPrestados.RemoveAt(i);
                     break;
@@ -80,20 +69,17 @@ namespace BibliotecaTP.Colecciones
             }
         }
 
-
         // Método opcional: para verificar si tiene un libro específico
         public bool tieneLibro(string titulo)
         {
             for (int i = 0; i < librosPrestados.Count; i++)
             {
-                if (librosPrestados[i].getTitulo().Equals(titulo))
+                if (librosPrestados[i].getTitulo().Equals(titulo, StringComparison.OrdinalIgnoreCase))
                 {
                     return true;
                 }
             }
             return false;
         }
-
-
     }
 }
