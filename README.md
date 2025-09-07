@@ -100,7 +100,7 @@ Adicionalmente se agregaron los siguientes métodos: `devolverLibro`, `librosPre
 
 ## Diagrama UML
 
-![Diagrama UML de CLASES](https://drive.google.com/file/d/1p0kvMnxoTTPzupLIMOrqZpyjdCSe8sM_/view?usp=sharing)
+![Diagrama UML de CLASES](https://drive.google.com/file/d/1p0kvMnxoTTPzupLIMOrqZpyjdCSe8sM_/view?usp=drive_link)
 
 ---
 
