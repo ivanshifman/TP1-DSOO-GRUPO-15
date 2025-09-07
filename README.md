@@ -97,6 +97,11 @@ El sistema se compone de las siguientes clases principales:
 
 Adicionalmente se agregaron los siguientes métodos: `devolverLibro`, `librosPrestadosAlLector`.
 
+
+## Diagrama UML
+
+![Diagrama UML de CLASES](https://drive.google.com/file/d/1p0kvMnxoTTPzupLIMOrqZpyjdCSe8sM_/view?usp=sharing)
+
 ---
 
 ## Casos de Prueba y Ejemplos
