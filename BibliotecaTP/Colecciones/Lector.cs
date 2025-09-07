@@ -7,8 +7,8 @@ namespace BibliotecaTP.Colecciones
 {
     internal class Lector
     {
-        private string nombre;
-        private string dni;
+        private string nombre = string.Empty;
+        private string dni = string.Empty;
         private List<Libro> librosPrestados;
 
         public Lector(string nombre, string dni)

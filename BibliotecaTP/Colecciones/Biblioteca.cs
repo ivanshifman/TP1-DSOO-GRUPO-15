@@ -74,7 +74,7 @@ namespace BibliotecaTP.Colecciones
         public string prestarLibro(string titulo, string dni)
         {
             // 1. Buscar el lector por DNI
-            Lector lectorSolicitante = buscarLector(dni);
+            Lector? lectorSolicitante = buscarLector(dni);
             if (lectorSolicitante == null)
             {
                 return $"No se puede realizar el préstamo: lector con DNI {dni} no existe.";
@@ -87,7 +87,7 @@ namespace BibliotecaTP.Colecciones
             }
 
             // 3. Buscar el libro por título en la colección de libros disponibles
-            Libro libroSolicitado = buscarLibroPorTitulo(titulo);
+            Libro? libroSolicitado = buscarLibroPorTitulo(titulo);
             if (libroSolicitado == null)
             {
                 return $"El libro con título '{titulo}' no existe en la biblioteca. \nLIBRO INEXISTENTE";
@@ -103,7 +103,7 @@ namespace BibliotecaTP.Colecciones
         }
 
         // Método auxiliar para buscar libro por título
-        private Libro buscarLibroPorTitulo(string titulo)
+        private Libro? buscarLibroPorTitulo(string titulo)
         {
             for (int i = 0; i < libros.Count; i++)
             {
@@ -119,7 +119,7 @@ namespace BibliotecaTP.Colecciones
         public string devolverLibro(string titulo, string dni)
         {
             // 1. Buscar el lector por DNI
-            Lector lectorSolicitante = buscarLector(dni);
+            Lector? lectorSolicitante = buscarLector(dni);
             if (lectorSolicitante == null)
             {
                 return $"No se puede devolver: lector con DNI {dni} no existe. \nLECTOR INEXISTENTE";
@@ -156,7 +156,7 @@ namespace BibliotecaTP.Colecciones
         public string librosPrestadosAlLector(string dni)
         {
             // 1. Buscar el lector por DNI
-            Lector lectorSolicitante = buscarLector(dni);
+            Lector? lectorSolicitante = buscarLector(dni);
             if (lectorSolicitante == null)
             {
                 return $"No se puede encontrar préstamos: lector con DNI {dni} no existe. \nLECTOR INEXISTENTE";

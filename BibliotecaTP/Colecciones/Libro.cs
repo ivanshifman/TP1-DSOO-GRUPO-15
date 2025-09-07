@@ -7,9 +7,9 @@ namespace BibliotecaTP.Colecciones
 {
     public class Libro
     {
-        private string titulo;
-        private string autor;
-        private string editorial;
+        private string titulo = string.Empty;
+        private string autor = string.Empty;
+        private string editorial = string.Empty;
 
         public string validaTitulo
         {
