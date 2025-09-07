@@ -55,28 +55,23 @@ El objetivo es desarrollar un **sistema de gestión de biblioteca** aplicando pr
 - **Colección de lectores registrados**.  
 - **Método AltaLector**, para dar de alta un lector si no estaba previamente registrado.  
 - **Método PrestarLibro**, que recibe el título de un libro y el DNI del lector solicitante, y retorna un string con alguno de los siguientes valores:  
-  - `"PRESTAMO EXITOSO"`: si el préstamo se concretó y el libro fue asignado al lector.  
-  - `"LIBRO CON TITULO {titulo} INEXISTENTE"`: si el libro no está en la colección.  
-  - `"TOPE DE PRESTAMO ALCANZADO"`: si el lector ya posee 3 préstamos vigentes.  
-  - `"LECTOR CON DNI {dni} INEXISTENTE"`: si el lector no está registrado en la biblioteca.  
+  - `"Se prestó el libro 'X' al lector con DNI 12345678. \nPRESTAMO EXITOSO"`  
+  - `"El libro con título 'X' no existe en la biblioteca. \nLIBRO INEXISTENTE"`  
+  - `"El lector con DNI 12345678 ha alcanzado su tope de préstamos. \nTOPE DE PRESTAMO ALCANZADO"`  
+  - `"No se puede realizar el préstamo: lector con DNI 12345679 no existe."`  
 
 
 ---
 
 ## Funcionalidades implementadas
 
-- **Alta de Lector**: Registra un nuevo lector con nombre y DNI.  
-- **Agregar Libro**: Agrega un libro con título, autor y editorial a la biblioteca.  
-- **Prestar Libro**: Gestiona préstamos con las validaciones mencionadas en la consigna.  
-- **Listado de Libros**: Muestra los libros actualmente disponibles.  
-- **Eliminar Libro**: Permite quitar un libro existente de la biblioteca.  
-
-Adicionalmente se implementaron las siguientes funciones:
-- **librosPrestadosAlLector**, muestra los libros de un lector.
-- **Método devolverLibro** , que recibe el título de un libro y el DNI del lector solicitante, y retorna un string con alguno de los siguientes valores:  
-  - `"LECTOR INEXISTENTE"`: si el lector no existe.  
-  - `"EL LIBRO INFORMADO NO LO TIENE EL LECTOR"`: si el libro no se le ha prestado al lector.
-  - `"DEVOLUCION EXITOSA"`: si la devolucion del libro se concretó, el libro fue devuelto a la biblioteca.
+ **Alta de Lector**: Registra un nuevo lector con nombre y DNI, devolviendo un mensaje de confirmación.  
+- **Agregar Libro**: Agrega un libro con título, autor y editorial a la biblioteca, validando duplicados.  
+- **Prestar Libro**: Gestiona préstamos con las validaciones mencionadas en la consigna y devuelve un string con el resultado.  
+- **Listado de Libros**: Muestra por consola los libros actualmente disponibles.  
+- **Eliminar Libro**: Permite quitar un libro existente de la biblioteca, devolviendo un mensaje de éxito o error.  
+- **LibrosPrestadosAlLector**: Devuelve un string con el listado de libros que tiene prestado un lector, o un mensaje de error si no existen o     no tiene libros.  
+- **Devolver Libro**: Devuelve un libro prestado a la biblioteca, con validaciones y mensaje de estado.  
 
 
 ---
@@ -119,6 +114,7 @@ Ejemplos de uso según lo implementado:
    - Entrada: `Título = "Libro3"`, `DNI = "12345678"`  
    - Salida:  
      ```
+     Se prestó el libro 'Libro3' al lector con DNI 12345678. 
      PRESTAMO EXITOSO
      ```
 
@@ -126,23 +122,24 @@ Ejemplos de uso según lo implementado:
    - Entrada: `Título = "Libro3"`, `DNI = "12345679"`  
    - Salida:  
      ```
-     LECTOR CON DNI 12345679 INEXISTENTE
+     No se puede realizar el préstamo: lector con DNI 12345679 no existe.
      ```
 
 4. **Préstamo con libro inexistente**  
    - Entrada: `Título = "Libr3"`, `DNI = "12345678"`  
    - Salida:  
      ```
-     LIBRO CON TITULO Libr3 INEXISTENTE
+     El libro con título 'Libr3' no existe en la biblioteca. 
+     LIBRO INEXISTENTE
      ```
 
 5. **Préstamo con tope de préstamos alcanzado**  
    - Entrada: `Título = "Libro5"`, `DNI = "12345678"` (lector ya tiene 3 libros prestados)  
    - Salida:  
      ```
+     El lector con DNI 12345678 ha alcanzado su tope de préstamos. 
      TOPE DE PRESTAMO ALCANZADO
      ```
-
 ---
 
 ## Requisitos
@@ -168,3 +165,4 @@ El desarrollo de este sistema permitió:
 - Implementar y gestionar colecciones de objetos (`libros` y `lectores`).  
 - Controlar restricciones de negocio (máximo de 3 préstamos por lector).  
 - Simular un sistema de biblioteca básico con validaciones de datos y operaciones esenciales.  
+- Producir **mensajes claros y detallados** que facilitan la prueba de cada caso en la ejecución de consola.
