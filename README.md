@@ -35,10 +35,13 @@ Este proyecto fue desarrollado por el siguiente equipo de trabajo:
 Este proyecto simula una biblioteca en la que los usuarios pueden:  
 
 - Registrar lectores.  
-- Agregar libros a la biblioteca.  
+- Agregar libros a la biblioteca.
+- Eliminar libros de la biblioteca.
 - Listar los libros disponibles.  
-- Eliminar libros.  
-- Realizar préstamos de libros.  
+- Realizar préstamos de libros.
+- Visualizar los libros prestados.
+- Devolver libros prestados.
+
 
 Se aplican restricciones en los préstamos: cada lector puede tener como máximo **3 libros en préstamo al mismo tiempo**.  
 
@@ -57,6 +60,7 @@ El objetivo es desarrollar un **sistema de gestión de biblioteca** aplicando pr
   - `"TOPE DE PRESTAMO ALCANZADO"`: si el lector ya posee 3 préstamos vigentes.  
   - `"LECTOR CON DNI {dni} INEXISTENTE"`: si el lector no está registrado en la biblioteca.  
 
+
 ---
 
 ## Funcionalidades implementadas
@@ -66,6 +70,14 @@ El objetivo es desarrollar un **sistema de gestión de biblioteca** aplicando pr
 - **Prestar Libro**: Gestiona préstamos con las validaciones mencionadas en la consigna.  
 - **Listado de Libros**: Muestra los libros actualmente disponibles.  
 - **Eliminar Libro**: Permite quitar un libro existente de la biblioteca.  
+
+Adicionalmente se implementaron las siguientes funciones:
+- **librosPrestadosAlLector**, muestra los libros de un lector.
+- **Método devolverLibro** , que recibe el título de un libro y el DNI del lector solicitante, y retorna un string con alguno de los siguientes valores:  
+  - `"LECTOR INEXISTENTE"`: si el lector no existe.  
+  - `"EL LIBRO INFORMADO NO LO TIENE EL LECTOR"`: si el libro no se le ha prestado al lector.
+  - `"DEVOLUCION EXITOSA"`: si la devolucion del libro se concretó, el libro fue devuelto a la biblioteca.
+
 
 ---
 
@@ -81,7 +93,9 @@ El sistema se compone de las siguientes clases principales:
   Permite controlar la cantidad máxima de préstamos (3).  
 
 - **Biblioteca**  
-  Gestiona los libros y lectores. Contiene los métodos `AgregarLibro`, `ListarLibros`, `EliminarLibro`, `AltaLector` y `PrestarLibro`.  
+  Gestiona los libros y lectores. Contiene los métodos `agregarLibro`, `listarLibros`, `eliminarLibro`, `altaLector` y `prestarLibro`.  
+
+Adicionalmente se agregaron los siguientes métodos: `devolverLibro`, `librosPrestadosAlLector`.
 
 ---
 

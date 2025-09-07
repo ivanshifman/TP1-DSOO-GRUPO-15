@@ -1,15 +1,17 @@
 ﻿using System;
 using BibliotecaTP.Colecciones;
+using System.Collections.Generic;
+using System.Text;
 
 namespace BibliotecaTP.Colecciones
 {
     public class Libro
     {
-        private string titulo = string.Empty;
-        private string autor = string.Empty;
-        private string editorial = string.Empty;
+        private string titulo;
+        private string autor;
+        private string editorial;
 
-        public string Titulo
+        public string validaTitulo
         {
             get => titulo;
             set
@@ -20,7 +22,7 @@ namespace BibliotecaTP.Colecciones
             }
         }
 
-        public string Autor
+        public string validaAutor
         {
             get => autor;
             set
@@ -31,7 +33,7 @@ namespace BibliotecaTP.Colecciones
             }
         }
 
-        public string Editorial
+        public string validaEditorial
         {
             get => editorial;
             set
@@ -44,14 +46,27 @@ namespace BibliotecaTP.Colecciones
 
         public Libro(string titulo, string autor, string editorial)
         {
-            Titulo = titulo;
-            Autor = autor;
-            Editorial = editorial;
+            validaTitulo = titulo;
+            validaAutor = autor;
+            validaEditorial = editorial;
+        }
+        public string getTitulo()
+        {
+            return titulo;
         }
 
+        public string getAutor()
+        {
+            return autor;
+        }
+
+        public string getEditorial()
+        {
+            return editorial;
+        }
         public override string ToString()
         {
-            return $"{Titulo} - {Autor} ({Editorial})";
+            return "Tìtulo: " + titulo + " Autor: " + autor + " Editorial: " + editorial;
         }
     }
 }

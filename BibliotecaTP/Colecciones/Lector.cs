@@ -1,17 +1,24 @@
 ﻿using BibliotecaTP.Colecciones;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Xml.Linq;
+using System.Text;
 
 namespace BibliotecaTP.Colecciones
 {
-    public class Lector
+    internal class Lector
     {
-        private string nombre = string.Empty;
-        private string dni = string.Empty;
+        private string nombre;
+        private string dni;
+        private List<Libro> librosPrestados;
 
-        public string Nombre
+        public Lector(string nombre, string dni)
+        {
+            validaNombre = nombre;
+            validaDni = dni;
+            this.librosPrestados = new List<Libro>();
+        }
+
+        public string validaNombre
         {
             get => nombre;
             private set
@@ -22,7 +29,7 @@ namespace BibliotecaTP.Colecciones
             }
         }
 
-        public string Dni
+        public string validaDni
         {
             get => dni;
             private set
@@ -32,31 +39,61 @@ namespace BibliotecaTP.Colecciones
                 dni = value;
             }
         }
-
-        public List<Libro> LibrosPrestados { get; } = new List<Libro>();
-
-        public int CantidadLibrosPrestados => LibrosPrestados.Count;
-
-        public Lector(string nombre, string dni)
+        public string getNombre()
         {
-            Nombre = nombre;
-            Dni = dni;
+            return nombre;
         }
 
-        public void AgregarPrestamo(Libro libro)
+        public string getDni()
         {
-            if (CantidadLibrosPrestados >= 3)
-                throw new InvalidOperationException("El lector ya tiene 3 libros prestados.");
-            LibrosPrestados.Add(libro);
+            return dni;
+        }
+
+        // Método para agregar un libro a la lista de préstamos
+        public void agregarLibro(Libro libro)
+        {
+            this.librosPrestados.Add(libro);
         }
 
         public override string ToString()
         {
-            string prestamos = LibrosPrestados.Count == 0
-                ? "Ninguno"
-                : string.Join(", ", LibrosPrestados.Select(l => l.Titulo));
+            return "Nombre: " + nombre + " DNI: " + dni;
 
-            return $"Nombre: {Nombre}, Dni: {Dni}, Libros prestados: {prestamos}";
         }
+        // Método para obtener la lista de libros prestados
+        public List<Libro> getLibrosPrestados()
+        {
+            return this.librosPrestados;
+        }
+
+        // Método opcional: para devolver un libro (útil para futuros métodos)
+        // Usando expresiòn Lambda
+        public void devolverLibroPorTitulo(string titulo)
+        {
+            for (int i = 0; i < librosPrestados.Count; i++)
+            {
+                if (librosPrestados[i].getTitulo() == titulo)
+                {
+                    librosPrestados.RemoveAt(i);
+                    break;
+                }
+            }
+        }
+
+
+        // Método opcional: para verificar si tiene un libro específico
+        public bool tieneLibro(string titulo)
+        {
+            for (int i = 0; i < librosPrestados.Count; i++)
+            {
+                if (librosPrestados[i].getTitulo().Equals(titulo))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+
     }
 }
