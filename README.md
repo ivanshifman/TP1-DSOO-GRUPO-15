@@ -71,7 +71,7 @@ El objetivo es desarrollar un **sistema de gestión de biblioteca** aplicando pr
 - **Listado de Libros**: Muestra los libros actualmente disponibles.  
 - **Eliminar Libro**: Permite quitar un libro existente de la biblioteca.  
 
-<u> Adicionalmente se implementaron las siguientes funciones: </u>
+Adicionalmente se implementaron las siguientes funciones:
 - **librosPrestadosAlLector**, muestra los libros de un lector.
 - **Método devolverLibro** , que recibe el título de un libro y el DNI del lector solicitante, y retorna un string con alguno de los siguientes valores:  
   - `"LECTOR INEXISTENTE"`: si el lector no existe.  
