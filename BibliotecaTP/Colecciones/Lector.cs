@@ -9,16 +9,16 @@ namespace BibliotecaTP.Colecciones
     {
         private string nombre = string.Empty;
         private string dni = string.Empty;
-        private List<Libro> librosPrestados;
+        private readonly List<Libro> librosPrestados;
 
         public Lector(string nombre, string dni)
         {
-            validaNombre = nombre;
-            validaDni = dni;
+            Nombre = nombre;
+            Dni = dni;
             this.librosPrestados = new List<Libro>();
         }
 
-        public string validaNombre
+        public string Nombre
         {
             get => nombre;
             private set
@@ -29,7 +29,7 @@ namespace BibliotecaTP.Colecciones
             }
         }
 
-        public string validaDni
+        public string Dni
         {
             get => dni;
             private set
@@ -39,11 +39,9 @@ namespace BibliotecaTP.Colecciones
                 dni = value;
             }
         }
-        public string getNombre() => nombre;
-        public string getDni() => dni;
 
         // Método para agregar un libro a la lista de préstamos
-        public void agregarLibro(Libro libro)
+        public void AgregarLibro(Libro libro)
         {
             this.librosPrestados.Add(libro);
         }
@@ -54,14 +52,14 @@ namespace BibliotecaTP.Colecciones
         }
 
         // Método para obtener la lista de libros prestados
-        public List<Libro> getLibrosPrestados() => this.librosPrestados;
+        public List<Libro> GetLibrosPrestados() => this.librosPrestados;
 
         // Método opcional: para devolver un libro (útil para futuros métodos)
-        public void devolverLibroPorTitulo(string titulo)
+        public void DevolverLibroPorTitulo(string titulo)
         {
             for (int i = 0; i < librosPrestados.Count; i++)
             {
-                if (librosPrestados[i].getTitulo().Equals(titulo, StringComparison.OrdinalIgnoreCase))
+                if (librosPrestados[i].Titulo.Equals(titulo, StringComparison.OrdinalIgnoreCase))
                 {
                     librosPrestados.RemoveAt(i);
                     break;
@@ -70,11 +68,11 @@ namespace BibliotecaTP.Colecciones
         }
 
         // Método opcional: para verificar si tiene un libro específico
-        public bool tieneLibro(string titulo)
+        public bool TieneLibro(string titulo)
         {
             for (int i = 0; i < librosPrestados.Count; i++)
             {
-                if (librosPrestados[i].getTitulo().Equals(titulo, StringComparison.OrdinalIgnoreCase))
+                if (librosPrestados[i].Titulo.Equals(titulo, StringComparison.OrdinalIgnoreCase))
                 {
                     return true;
                 }

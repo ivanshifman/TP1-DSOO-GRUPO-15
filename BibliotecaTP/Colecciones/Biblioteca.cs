@@ -6,10 +6,10 @@ using System.Linq;
 
 namespace BibliotecaTP.Colecciones
 {
-    internal class Biblioteca
+    public class Biblioteca
     {
-        private List<Libro> libros;
-        private List<Lector> lectores;
+        private readonly List<Libro> libros;
+        private readonly List<Lector> lectores;
 
         public Biblioteca()
         {
@@ -17,24 +17,24 @@ namespace BibliotecaTP.Colecciones
             this.lectores = new List<Lector>();
         }
 
-        private Libro? buscarLibro(string titulo)
+        private Libro? BuscarLibro(string titulo)
         {
-            return libros.FirstOrDefault(l => l.validaTitulo.Equals(titulo, StringComparison.OrdinalIgnoreCase));
+            return libros.FirstOrDefault(l => l.Titulo.Equals(titulo, StringComparison.OrdinalIgnoreCase));
         }
 
-        private Lector? buscarLector(string dni)
+        private Lector? BuscarLector(string dni)
         {
-            return lectores.FirstOrDefault(l => l.validaDni == dni);
+            return lectores.FirstOrDefault(l => l.Dni == dni);
         }
 
-        public bool agregarLibro(string titulo, string autor, string editorial)
+        public bool AgregarLibro(string titulo, string autor, string editorial)
         {
-            if (buscarLibro(titulo) != null) return false;
+            if (BuscarLibro(titulo) != null) return false;
             libros.Add(new Libro(titulo, autor, editorial));
             return true;
         }
 
-        public void listarLibros()
+        public void ListarLibros()
         {
             if (libros.Count == 0)
             {
@@ -49,9 +49,9 @@ namespace BibliotecaTP.Colecciones
             }
         }
 
-        public string eliminarLibro(string titulo)
+        public string EliminarLibro(string titulo)
         {
-            Libro? libro = buscarLibro(titulo);
+            Libro? libro = BuscarLibro(titulo);
             if (libro != null)
             {
                 libros.Remove(libro);
@@ -60,9 +60,9 @@ namespace BibliotecaTP.Colecciones
             return "LIBRO INEXISTENTE";
         }
 
-        public string altaLector(string nombre, string dni)
+        public string AltaLector(string nombre, string dni)
         {
-            if (buscarLector(dni) != null)
+            if (BuscarLector(dni) != null)
             {
                 return $"LECTOR CON DNI {dni} YA EXISTE";
             }
@@ -71,23 +71,23 @@ namespace BibliotecaTP.Colecciones
             return $"SE DIO DE ALTA AL LECTOR {nombre}";
         }
 
-        public string prestarLibro(string titulo, string dni)
+        public string PrestarLibro(string titulo, string dni)
         {
             // 1. Buscar el lector por DNI
-            Lector? lectorSolicitante = buscarLector(dni);
+            Lector? lectorSolicitante = BuscarLector(dni);
             if (lectorSolicitante == null)
             {
                 return $"No se puede realizar el préstamo: lector con DNI {dni} no existe.";
             }
 
             // 2. Verificar que el lector no haya alcanzado el tope de préstamos (3 libros)
-            if (lectorSolicitante.getLibrosPrestados().Count >= 3)
+            if (lectorSolicitante.GetLibrosPrestados().Count >= 3)
             {
                 return $"El lector con DNI {dni} ha alcanzado su tope de préstamos. \nTOPE DE PRESTAMO ALCANZADO";
             }
 
             // 3. Buscar el libro por título en la colección de libros disponibles
-            Libro? libroSolicitado = buscarLibroPorTitulo(titulo);
+            Libro? libroSolicitado = BuscarLibroPorTitulo(titulo);
             if (libroSolicitado == null)
             {
                 return $"El libro con título '{titulo}' no existe en la biblioteca. \nLIBRO INEXISTENTE";
@@ -98,16 +98,16 @@ namespace BibliotecaTP.Colecciones
             libros.Remove(libroSolicitado);
 
             // Asignar el libro al lector
-            lectorSolicitante.agregarLibro(libroSolicitado);
+            lectorSolicitante.AgregarLibro(libroSolicitado);
             return $"Se prestó el libro '{titulo}' al lector con DNI {dni}. \nPRESTAMO EXITOSO";
         }
 
         // Método auxiliar para buscar libro por título
-        private Libro? buscarLibroPorTitulo(string titulo)
+        private Libro? BuscarLibroPorTitulo(string titulo)
         {
             for (int i = 0; i < libros.Count; i++)
             {
-                if (libros[i].getTitulo().Equals(titulo))
+                if (libros[i].Titulo.Equals(titulo))
                 {
                     return libros[i];
                 }
@@ -116,17 +116,17 @@ namespace BibliotecaTP.Colecciones
         }
 
 
-        public string devolverLibro(string titulo, string dni)
+        public string DevolverLibro(string titulo, string dni)
         {
             // 1. Buscar el lector por DNI
-            Lector? lectorSolicitante = buscarLector(dni);
+            Lector? lectorSolicitante = BuscarLector(dni);
             if (lectorSolicitante == null)
             {
                 return $"No se puede devolver: lector con DNI {dni} no existe. \nLECTOR INEXISTENTE";
             }
 
             // 2. Buscar el libro por título en la colección de libros del Lector
-            if (lectorSolicitante.tieneLibro(titulo) == false)
+            if (lectorSolicitante.TieneLibro(titulo) == false)
             {
                 return $"El lector con DNI {dni} no tiene el libro '{titulo}'. \nEL LIBRO INFORMADO NO LO TIENE EL LECTOR";
             }
@@ -134,50 +134,50 @@ namespace BibliotecaTP.Colecciones
             // 3. OBTENER LOS DATOS DEL LIBRO
             string autor = "";
             string editorial = "";
-            foreach (Libro libro in lectorSolicitante.getLibrosPrestados())
+            foreach (Libro libro in lectorSolicitante.GetLibrosPrestados())
             {
-                if (libro.getTitulo().Equals(titulo, StringComparison.OrdinalIgnoreCase))
+                if (libro.Titulo.Equals(titulo, StringComparison.OrdinalIgnoreCase))
                 {
-                    autor = libro.getAutor();
-                    editorial = libro.getEditorial();
+                    autor = libro.Autor;
+                    editorial = libro.Editorial;
                     break;
                 }
             }
 
             // 4. Quitar el libro del lector
-            lectorSolicitante.devolverLibroPorTitulo(titulo);
+            lectorSolicitante.DevolverLibroPorTitulo(titulo);
 
             // 5. AGREGAR EL LIBRO DE VUELTA A LA BIBLIOTECA
-            agregarLibro(titulo, autor, editorial);
+            AgregarLibro(titulo, autor, editorial);
 
             return $"Libro '{titulo}' devuelto correctamente y agregado al catálogo. \nDEVOLUCION EXITOSA";
         }
 
-        public string librosPrestadosAlLector(string dni)
+        public string LibrosPrestadosAlLector(string dni)
         {
             // 1. Buscar el lector por DNI
-            Lector? lectorSolicitante = buscarLector(dni);
+            Lector? lectorSolicitante = BuscarLector(dni);
             if (lectorSolicitante == null)
             {
                 return $"No se puede encontrar préstamos: lector con DNI {dni} no existe. \nLECTOR INEXISTENTE";
             }
 
             // 2. Verificar que el lector tenga libros prestados
-            if (lectorSolicitante.getLibrosPrestados().Count == 0)
+            if (lectorSolicitante.GetLibrosPrestados().Count == 0)
             {
                 return $"El lector con DNI {dni} no tiene libros prestados. \nLECTOR NO CUENTA CON LIBROS PRESTADOS";
             }
 
             // 3. si tiene libros recorre la lista de libros e imprime el titulo de los que tiene el lector
-            string resultado = $"El lector con DNI {dni} tiene {lectorSolicitante.getLibrosPrestados().Count} libros:\n";
+            string resultado = $"El lector con DNI {dni} tiene {lectorSolicitante.GetLibrosPrestados().Count} libros:\n";
             // Recorrer la lista de libros prestados
-            for (int i = 0; i < lectorSolicitante.getLibrosPrestados().Count; i++)
+            for (int i = 0; i < lectorSolicitante.GetLibrosPrestados().Count; i++)
             {
                 // Obtener el libro en la posición i
-                Libro libro = lectorSolicitante.getLibrosPrestados()[i];
+                Libro libro = lectorSolicitante.GetLibrosPrestados()[i];
 
                 // Imprimir el título del libro
-                resultado += $"  {i + 1}. {libro.getTitulo()}\n";
+                resultado += $"  {i + 1}. {libro.Titulo}\n";
             }
 
             resultado += "FIN DE LA LISTA DE LIBROS PRESTADOS";
