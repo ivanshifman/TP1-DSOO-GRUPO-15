@@ -93,9 +93,9 @@ El sistema se compone de las siguientes clases principales:
 Adicionalmente se agregaron los siguientes métodos: `devolverLibro`, `librosPrestadosAlLector`.
 
 
-## Diagrama UML
+## Diagrama de clases
 
-<img width="1298" height="708" alt="Diagrama2" src="https://github.com/user-attachments/assets/83066b35-3036-40ff-8029-a6d4a7be6eaf" />
+![Diagrama de Clases](BibliotecaTP/uml/UML-TP1-DSOO.png)
 
 ---
 
