@@ -7,7 +7,7 @@ internal class Program
 {
     static void Main(string[] args)
     {
-        Biblioteca biblioteca = new Biblioteca();
+        Biblioteca biblioteca = new();
 
         CargarLibros(10, biblioteca);
         biblioteca.ListarLibros();
