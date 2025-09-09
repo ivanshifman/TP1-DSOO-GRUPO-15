@@ -144,7 +144,7 @@ Ejemplos de uso según lo implementado:
 
 ## Requisitos
 
-- **.NET 6 o superior**  
+- **.NET 8 o superior**  
 - **Visual Studio 2019/2022** o cualquier IDE compatible con C#  
 
 ---
