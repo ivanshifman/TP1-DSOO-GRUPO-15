@@ -6,6 +6,13 @@
         private string autor = string.Empty;
         private string editorial = string.Empty;
 
+        public Libro(string titulo, string autor, string editorial)
+        {
+            Titulo = titulo;
+            Autor = autor;
+            Editorial = editorial;
+        }
+
         public string Titulo
         {
             get => titulo;
@@ -37,13 +44,6 @@
                     throw new ArgumentException("La editorial no puede estar vacía.");
                 editorial = value;
             }
-        }
-
-        public Libro(string titulo, string autor, string editorial)
-        {
-            Titulo = titulo;
-            Autor = autor;
-            Editorial = editorial;
         }
 
         public override string ToString()

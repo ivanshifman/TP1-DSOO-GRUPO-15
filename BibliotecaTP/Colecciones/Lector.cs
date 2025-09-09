@@ -35,19 +35,14 @@
             }
         }
 
+        // Método para obtener la lista de libros prestados
+        public List<Libro> GetLibrosPrestados() => this.librosPrestados;
+
         // Método para agregar un libro a la lista de préstamos
         public void AgregarLibro(Libro libro)
         {
             this.librosPrestados.Add(libro);
         }
-
-        public override string ToString()
-        {
-            return $"Nombre: {Nombre} DNI: {Dni}";
-        }
-
-        // Método para obtener la lista de libros prestados
-        public List<Libro> GetLibrosPrestados() => this.librosPrestados;
 
         // Método opcional: para devolver un libro (útil para futuros métodos)
         public void DevolverLibroPorTitulo(string titulo)
@@ -73,6 +68,11 @@
                 }
             }
             return false;
+        }
+
+        public override string ToString()
+        {
+            return $"Nombre: {Nombre} DNI: {Dni}";
         }
     }
 }

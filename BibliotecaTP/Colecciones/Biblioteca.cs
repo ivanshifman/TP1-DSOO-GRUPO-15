@@ -81,7 +81,7 @@
             }
 
             // 3. Buscar el libro por título en la colección de libros disponibles
-            Libro? libroSolicitado = BuscarLibroPorTitulo(titulo);
+            Libro? libroSolicitado = BuscarLibro(titulo);
             if (libroSolicitado == null)
             {
                 return $"El libro con título '{titulo}' no existe en la biblioteca. \nLIBRO INEXISTENTE";
@@ -95,20 +95,6 @@
             lectorSolicitante.AgregarLibro(libroSolicitado);
             return $"Se prestó el libro '{titulo}' al lector con DNI {dni}. \nPRESTAMO EXITOSO";
         }
-
-        // Método auxiliar para buscar libro por título
-        private Libro? BuscarLibroPorTitulo(string titulo)
-        {
-            for (int i = 0; i < libros.Count; i++)
-            {
-                if (libros[i].Titulo.Equals(titulo))
-                {
-                    return libros[i];
-                }
-            }
-            return null;
-        }
-
 
         public string DevolverLibro(string titulo, string dni)
         {
