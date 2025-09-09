@@ -15,7 +15,7 @@ namespace BibliotecaTP.Colecciones
         {
             Nombre = nombre;
             Dni = dni;
-            this.librosPrestados = new List<Libro>();
+            this.librosPrestados = [];
         }
 
         public string Nombre
