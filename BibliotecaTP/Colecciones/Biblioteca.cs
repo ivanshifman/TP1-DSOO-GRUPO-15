@@ -1,10 +1,4 @@
-﻿using BibliotecaTP.Colecciones;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Linq;
-
-namespace BibliotecaTP.Colecciones
+﻿namespace BibliotecaTP.Colecciones
 {
     public class Biblioteca
     {
