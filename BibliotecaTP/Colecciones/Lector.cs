@@ -1,9 +1,4 @@
-﻿using BibliotecaTP.Colecciones;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BibliotecaTP.Colecciones
+﻿namespace BibliotecaTP.Colecciones
 {
     internal class Lector
     {
@@ -15,7 +10,7 @@ namespace BibliotecaTP.Colecciones
         {
             Nombre = nombre;
             Dni = dni;
-            this.librosPrestados = new List<Libro>();
+            this.librosPrestados = [];
         }
 
         public string Nombre

@@ -1,13 +1,10 @@
 ﻿using BibliotecaTP.Colecciones;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 internal class Program
 {
-    static void Main(string[] args)
+    static void Main(string[] _)
     {
-        Biblioteca biblioteca = new Biblioteca();
+        Biblioteca biblioteca = new();
 
         CargarLibros(10, biblioteca);
         biblioteca.ListarLibros();

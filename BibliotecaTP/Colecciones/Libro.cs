@@ -1,9 +1,4 @@
-﻿using System;
-using BibliotecaTP.Colecciones;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BibliotecaTP.Colecciones
+﻿namespace BibliotecaTP.Colecciones
 {
     internal class Libro
     {

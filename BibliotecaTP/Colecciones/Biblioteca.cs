@@ -1,10 +1,4 @@
-﻿using BibliotecaTP.Colecciones;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Linq;
-
-namespace BibliotecaTP.Colecciones
+﻿namespace BibliotecaTP.Colecciones
 {
     public class Biblioteca
     {
@@ -13,8 +7,8 @@ namespace BibliotecaTP.Colecciones
 
         public Biblioteca()
         {
-            this.libros = new List<Libro>();
-            this.lectores = new List<Lector>();
+            this.libros = [];
+            this.lectores = [];
         }
 
         private Libro? BuscarLibro(string titulo)
