@@ -43,7 +43,7 @@
 
         public override string ToString()
         {
-            return $"Nombre: {nombre} DNI: {dni}";
+            return $"Nombre: {Nombre} DNI: {Dni}";
         }
 
         // Método para obtener la lista de libros prestados
