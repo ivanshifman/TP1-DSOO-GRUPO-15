@@ -42,7 +42,10 @@
         }
 
         // Método para obtener la lista de libros prestados
-        public List<Libro> GetLibrosPrestados() => this.librosPrestados;
+        public List<Libro> GetLibrosPrestados()
+        {
+            return librosPrestados;
+        }
 
         // Método para agregar un libro a la lista de préstamos
         public void AgregarLibro(Libro libro)
