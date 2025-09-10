@@ -2,7 +2,7 @@
 
 internal class Program
 {
-    static void Main(string[] _)
+    private static void Main(string[] _)
     {
         Biblioteca biblioteca = new();
 
