@@ -19,7 +19,10 @@
             set
             {
                 if (string.IsNullOrWhiteSpace(value))
+                {
                     throw new ArgumentException("El título no puede estar vacío.");
+                }
+
                 titulo = value;
             }
         }
