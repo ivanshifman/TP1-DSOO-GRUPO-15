@@ -19,7 +19,10 @@
             set
             {
                 if (string.IsNullOrWhiteSpace(value))
+                {
                     throw new ArgumentException("El título no puede estar vacío.");
+                }
+
                 titulo = value;
             }
         }
@@ -30,7 +33,10 @@
             set
             {
                 if (string.IsNullOrWhiteSpace(value))
+                {
                     throw new ArgumentException("El autor no puede estar vacío.");
+                }
+
                 autor = value;
             }
         }
@@ -41,7 +47,10 @@
             set
             {
                 if (string.IsNullOrWhiteSpace(value))
+                {
                     throw new ArgumentException("La editorial no puede estar vacía.");
+                }
+
                 editorial = value;
             }
         }

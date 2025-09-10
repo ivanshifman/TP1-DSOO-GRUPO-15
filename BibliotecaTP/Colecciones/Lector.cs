@@ -10,7 +10,7 @@
         {
             Nombre = nombre;
             Dni = dni;
-            this.librosPrestados = [];
+            librosPrestados = [];
         }
 
         public string Nombre
@@ -19,7 +19,10 @@
             private set
             {
                 if (string.IsNullOrWhiteSpace(value))
+                {
                     throw new ArgumentException("El nombre no puede estar vacío.");
+                }
+
                 nombre = value;
             }
         }
@@ -30,18 +33,24 @@
             private set
             {
                 if (string.IsNullOrWhiteSpace(value) || value.Length < 7)
+                {
                     throw new ArgumentException("El DNI no es válido.");
+                }
+
                 dni = value;
             }
         }
 
         // Método para obtener la lista de libros prestados
-        public List<Libro> GetLibrosPrestados() => this.librosPrestados;
+        public List<Libro> GetLibrosPrestados()
+        {
+            return librosPrestados;
+        }
 
         // Método para agregar un libro a la lista de préstamos
         public void AgregarLibro(Libro libro)
         {
-            this.librosPrestados.Add(libro);
+            librosPrestados.Add(libro);
         }
 
         // Método opcional: para devolver un libro (útil para futuros métodos)
