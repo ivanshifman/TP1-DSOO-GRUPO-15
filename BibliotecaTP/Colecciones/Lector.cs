@@ -33,7 +33,10 @@
             private set
             {
                 if (string.IsNullOrWhiteSpace(value) || value.Length < 7)
+                {
                     throw new ArgumentException("El DNI no es válido.");
+                }
+
                 dni = value;
             }
         }
