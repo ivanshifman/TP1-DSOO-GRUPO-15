@@ -10,7 +10,7 @@
         {
             Nombre = nombre;
             Dni = dni;
-            this.librosPrestados = [];
+            librosPrestados = [];
         }
 
         public string Nombre
