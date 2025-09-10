@@ -8,7 +8,7 @@
         public Biblioteca()
         {
             libros = [];
-            this.lectores = [];
+            lectores = [];
         }
 
         private Libro? BuscarLibro(string titulo)
