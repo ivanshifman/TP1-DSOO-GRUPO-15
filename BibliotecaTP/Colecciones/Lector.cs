@@ -53,20 +53,15 @@
             librosPrestados.Add(libro);
         }
 
-        // Método opcional: para devolver un libro (útil para futuros métodos)
-        public void DevolverLibroPorTitulo(string titulo)
+        // Método para devolver un libro
+        public Libro? DevolverLibroPorTitulo(string titulo)
         {
-            for (int i = 0; i < librosPrestados.Count; i++)
-            {
-                if (librosPrestados[i].Titulo.Equals(titulo, StringComparison.OrdinalIgnoreCase))
-                {
-                    librosPrestados.RemoveAt(i);
-                    break;
-                }
-            }
+            var libro = librosPrestados.FirstOrDefault(l => l.Titulo.Equals(titulo, StringComparison.OrdinalIgnoreCase));
+            if (libro != null) librosPrestados.Remove(libro);
+            return libro;
         }
 
-        // Método opcional: para verificar si tiene un libro específico
+        // Método para verificar si tiene un libro específico
         public bool TieneLibro(string titulo)
         {
             for (int i = 0; i < librosPrestados.Count; i++)

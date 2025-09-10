@@ -4,7 +4,7 @@
     {
         private readonly List<Libro> libros;
         private readonly List<Lector> lectores;
-
+        private const int topePrestamos = 3;
         public Biblioteca()
         {
             libros = [];
@@ -28,20 +28,22 @@
             return true;
         }
 
-        public void ListarLibros()
+        public string ListarLibros()
         {
             if (libros.Count == 0)
             {
-                Console.WriteLine("No hay libros en la biblioteca.");
-                return;
+                return "No hay libros en la biblioteca.";
             }
 
-            Console.WriteLine("Libros en la biblioteca:");
+            string resultado = "Libros en la biblioteca:\n";
             for (int i = 0; i < libros.Count; i++)
             {
-                Console.WriteLine($"[{i + 1}] {libros[i]}");
+                resultado += $"[{i + 1}] {libros[i]}\n";
             }
+
+            return resultado;
         }
+
 
         public string EliminarLibro(string titulo)
         {
@@ -75,7 +77,7 @@
             }
 
             // 2. Verificar que el lector no haya alcanzado el tope de préstamos (3 libros)
-            if (lectorSolicitante.GetLibrosPrestados().Count >= 3)
+            if (lectorSolicitante.GetLibrosPrestados().Count >= topePrestamos)
             {
                 return $"El lector con DNI {dni} ha alcanzado su tope de préstamos. \nTOPE DE PRESTAMO ALCANZADO";
             }
@@ -98,40 +100,26 @@
 
         public string DevolverLibro(string titulo, string dni)
         {
-            // 1. Buscar el lector por DNI
+            // 1. Buscar lector
             Lector? lectorSolicitante = BuscarLector(dni);
             if (lectorSolicitante == null)
             {
                 return $"No se puede devolver: lector con DNI {dni} no existe. \nLECTOR INEXISTENTE";
             }
 
-            // 2. Buscar el libro por título en la colección de libros del Lector
-            if (lectorSolicitante.TieneLibro(titulo) == false)
+            // 2. Intentar devolver libro
+            Libro? libroDevuelto = lectorSolicitante.DevolverLibroPorTitulo(titulo);
+            if (libroDevuelto == null)
             {
                 return $"El lector con DNI {dni} no tiene el libro '{titulo}'. \nEL LIBRO INFORMADO NO LO TIENE EL LECTOR";
             }
 
-            // 3. OBTENER LOS DATOS DEL LIBRO
-            string autor = "";
-            string editorial = "";
-            foreach (Libro libro in lectorSolicitante.GetLibrosPrestados())
-            {
-                if (libro.Titulo.Equals(titulo, StringComparison.OrdinalIgnoreCase))
-                {
-                    autor = libro.Autor;
-                    editorial = libro.Editorial;
-                    break;
-                }
-            }
-
-            // 4. Quitar el libro del lector
-            lectorSolicitante.DevolverLibroPorTitulo(titulo);
-
-            // 5. AGREGAR EL LIBRO DE VUELTA A LA BIBLIOTECA
-            AgregarLibro(titulo, autor, editorial);
+            // 3. Agregar el libro de vuelta a la biblioteca
+            libros.Add(libroDevuelto);
 
             return $"Libro '{titulo}' devuelto correctamente y agregado al catálogo. \nDEVOLUCION EXITOSA";
         }
+
 
         public string LibrosPrestadosAlLector(string dni)
         {

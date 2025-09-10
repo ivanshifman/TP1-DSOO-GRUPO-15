@@ -7,11 +7,11 @@ internal class Program
         Biblioteca biblioteca = new();
 
         CargarLibros(10, biblioteca);
-        biblioteca.ListarLibros();
+        Console.WriteLine(biblioteca.ListarLibros());
 
         Console.WriteLine("Eliminamos el Libro5 de la biblioteca:");
         Console.WriteLine(biblioteca.EliminarLibro("Libro5"));
-        biblioteca.ListarLibros();
+        Console.WriteLine(biblioteca.ListarLibros());
 
         // ultima consigna Semana 5
 
@@ -40,7 +40,7 @@ internal class Program
         Console.WriteLine(biblioteca.PrestarLibro("Libro2", "12345678"));
 
         Console.WriteLine("Listado actualizado de libros disponibles en la biblioteca:");
-        biblioteca.ListarLibros();
+        Console.WriteLine(biblioteca.ListarLibros());
 
         Console.WriteLine("TEST MUESTRA Los libros prestados al lector:");
         Console.WriteLine(biblioteca.LibrosPrestadosAlLector("12345678"));
@@ -58,7 +58,7 @@ internal class Program
         Console.WriteLine(biblioteca.LibrosPrestadosAlLector("12345678"));
 
         Console.WriteLine("Listado actualizado de libros disponibles en la biblioteca:");
-        biblioteca.ListarLibros();
+        Console.WriteLine(biblioteca.ListarLibros());
 
         Console.WriteLine("Presione una tecla para finalizar...");
         Console.ReadKey();
