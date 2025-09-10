@@ -47,7 +47,10 @@
             set
             {
                 if (string.IsNullOrWhiteSpace(value))
+                {
                     throw new ArgumentException("La editorial no puede estar vacía.");
+                }
+
                 editorial = value;
             }
         }
