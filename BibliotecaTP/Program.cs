@@ -64,7 +64,7 @@ internal class Program
         Console.ReadKey();
     }
 
-    static void CargarLibros(int cantidad, Biblioteca biblioteca)
+    private static void CargarLibros(int cantidad, Biblioteca biblioteca)
     {
         for (int i = 1; i <= cantidad; i++)
         {
