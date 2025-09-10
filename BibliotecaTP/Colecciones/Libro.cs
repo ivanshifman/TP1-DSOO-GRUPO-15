@@ -33,7 +33,10 @@
             set
             {
                 if (string.IsNullOrWhiteSpace(value))
+                {
                     throw new ArgumentException("El autor no puede estar vacío.");
+                }
+
                 autor = value;
             }
         }
