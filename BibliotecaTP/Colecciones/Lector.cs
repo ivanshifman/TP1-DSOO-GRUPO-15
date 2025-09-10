@@ -50,7 +50,7 @@
         // Método para agregar un libro a la lista de préstamos
         public void AgregarLibro(Libro libro)
         {
-            this.librosPrestados.Add(libro);
+            librosPrestados.Add(libro);
         }
 
         // Método opcional: para devolver un libro (útil para futuros métodos)
