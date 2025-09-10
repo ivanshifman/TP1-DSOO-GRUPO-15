@@ -7,7 +7,7 @@
 
         public Biblioteca()
         {
-            this.libros = [];
+            libros = [];
             this.lectores = [];
         }
 
