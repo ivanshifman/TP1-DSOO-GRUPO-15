@@ -24,10 +24,6 @@ Este proyecto fue desarrollado por el siguiente equipo de trabajo:
   Email: mandrakes@gmail.com  
   Nombre Completo: Marcelo Zárate
 
-- **Ana Schneider**  
-  Email: anaesneider@gmail.com  
-  Nombre Completo: Ana Schneider  
-
 ---
 
 ## Descripción
