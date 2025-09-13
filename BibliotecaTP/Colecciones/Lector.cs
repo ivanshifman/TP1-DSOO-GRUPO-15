@@ -61,19 +61,6 @@
             return libro;
         }
 
-        // Método para verificar si tiene un libro específico
-        public bool TieneLibro(string titulo)
-        {
-            for (int i = 0; i < librosPrestados.Count; i++)
-            {
-                if (librosPrestados[i].Titulo.Equals(titulo, StringComparison.OrdinalIgnoreCase))
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
         public override string ToString()
         {
             return $"Nombre: {Nombre} DNI: {Dni}";
